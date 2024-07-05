@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<style>
+    .flex{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+        color: var(--dark-color);
+        background: var(--light-purple-color);
+    }
+    .popup{
+        margin-top: 30px;
+    background-color: rgb(255, 234, 46);
+    padding: 1rem 1rem 3rem 2rem;
+    width: 1100px;
+    height: 580px;
+    border-top-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    position: relative;
+    box-shadow: 2px 2px 3px black, 2px 2px 3px black;
+    text-align: center;
+    }
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 10px;
+    }
+    h1{
+        color: rgb(93, 174, 255);
+        font-family: 'Times New Roman', Times, serif;
+        margin-bottom: 10px;
+    }
+    p{
+        color: blue;
+    }
+</style>
+<div class="flex">
+    <div id="popup" class="popup">
+        <img src="{% static 'images/Screenshot_2024-01-31_170324-removebg-preview.png' %}" alt="" width="200" height="200">
+        <h1>About BOL</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae modi aperiam illo maiores, corrupti reiciendis aut, soluta quod perspiciatis omnis est nisi cupiditate dicta cum perferendis recusandae animi autem similique.
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe ut repudiandae necessitatibus doloremque temporibus deleniti facilis nihil, accusantium blanditiis, vel neque excepturi a! Quia, repellendus quasi iusto voluptas laboriosam placeat?
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, quia nam, voluptas autem maiores fugiat iure vitae quibusdam earum sapiente ratione quisquam corrupti cumque ipsa, in quod quae laudantium labore!
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, quia nam, voluptas autem maiores fugiat iure vitae quibusdam earum sapiente ratione quisquam corrupti cumque ipsa, in quod quae laudantium labore!
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, quia nam, voluptas autem maiores fugiat iure vitae quibusdam earum sapiente ratione quisquam corrupti cumque ipsa, in quod quae laudantium labore!
+        </p>
+    </div>
+</div>
+{% endblock body %}

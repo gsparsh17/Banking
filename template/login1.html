@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<style>
+    .flex{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+        color: var(--dark-color);
+        background: var(--light-purple-color);
+    }
+    .popup{
+        margin-top: 30px;
+    background-color: rgb(255, 234, 46);
+    padding: 1rem 2rem 3rem 2rem;
+    width: 700px;
+    height: 580px;
+    border-top-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    position: relative;
+    box-shadow: 2px 2px 3px black, 2px 2px 3px black;
+    }
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 10px;
+    }
+    label{
+      color: rgb(93, 174, 255);
+      font-size: 20px;
+    }
+    .form-control{
+      background-color: rgb(172, 212, 252);
+    }
+</style>
+<div class="flex">
+<div id="popup" class="popup">
+    <img src="{% static 'images/Screenshot_2024-01-31_170324-removebg-preview.png' %}" alt="" width="200" height="200">
+    <form method="POST">
+    {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputEmail1">Username (Customer ID)</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" name="username" required>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+  </div>
+{% endblock body %}

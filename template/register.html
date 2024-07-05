@@ -1,0 +1,337 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<style>
+    .flex{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+        color: var(--dark-color);
+        background: var(--light-purple-color);
+    }
+    .popup{
+        margin-top: 20px;
+    background-color: rgb(255, 234, 46);
+    padding: 1rem 2rem 3rem 2rem;
+    width: 700px;
+    height: 580px;
+    border-top-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    position: relative;
+    box-shadow: 2px 2px 3px black, 2px 2px 3px black;
+    }
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 10px;
+    }
+    label{
+        color: rgb(93, 174, 255);
+        font-size: 20px;
+      }
+      .form-control{
+        background-color: rgb(172, 212, 252);
+      }
+      .flex1{
+        width: 800px;
+        display: flex;
+        flex-direction: row;
+      }
+      .fl1{
+        width: 300px;
+        display: flexbox;
+        margin: 5px;
+        margin-bottom: 0px;
+      }
+      .btn{
+        background-color: rgb(93, 174, 255);
+        color: rgb(255, 234, 46);
+      }
+      #otp{
+        position: absolute;
+        top: 30%;
+        left: 15%;
+        box-shadow: 0 0 5px 5px blueviolet;
+        width: 500px;
+        border: 2px solid blueviolet;
+        border-radius: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: rgb(93, 174, 255);
+        height: 55vh;
+        color: rgb(255, 234, 46);
+        display: none;
+}
+.otp-field {
+  display: flex;
+}
+.otp-field input {
+  width: 54px;
+  font-size: 32px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 2px;
+  border: 2px solid blueviolet;
+  background: rgb(255, 234, 46);
+  font-weight: bold;
+  color: #fff;
+  outline: none;
+  transition: all 0.1s;
+}
+.otp-field input:focus {
+  border: 2px solid #a527ff;
+  box-shadow: 0 0 2px 2px #a527ff6a;
+}
+.disabled {
+  opacity: 0.5;
+}
+.space {
+  margin-right: 1rem !important;
+}
+#sub{
+  z-index: 2;
+  display: none;
+  position:absolute;
+  right: 10%;
+  bottom: 5%;
+}
+#mes{
+  color: red;
+  margin-top: 10px;
+  display: none;
+}
+#gen{
+  margin-top: 0px;
+}
+.form-check{
+  margin-top: 10px;
+}
+</style>
+<script>
+  
+</script>
+<div class="flex">
+<div id="popup" class="popup">
+    <img src="{% static 'images/Screenshot_2024-01-31_170324-removebg-preview.png' %}" alt="" width="150" height="150">
+<form class="needs-validation" novalidate method="POST" action="/register">
+  {% csrf_token %}
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom01">First name</label>
+      <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="" name="firstname" required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom02">Last name</label>
+      <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="" name="lastname" required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationCustomUsername">Customer ID</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend">@</span>
+        </div>
+        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" name="username" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-3 mb-1">
+      <label for="validationCustom03">City</label>
+      <input type="text" class="form-control" id="validationCustom03" placeholder="City" name="city" required>
+      <div class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-3 mb-1">
+      <label for="validationCustom03">Phone No.</label>
+      <input type="tel" class="form-control" id="validationCustom03" placeholder="0000000000" value="+91" name="phoneNo" required>
+      <div class="invalid-feedback">
+        Please provide a valid Phone No,
+      </div>
+    </div>
+    <div class="col-md-3 mb-1">
+      <label for="validationCustom04">State</label>
+      <input type="text" class="form-control" id="validationCustom04" placeholder="State" name="state" required>
+      <div class="invalid-feedback">
+        Please provide a valid state.
+      </div>
+    </div>
+    <div class="col-md-3 mb-1">
+      <label for="validationCustom05">Pin Code</label>
+      <input type="text" class="form-control" id="validationCustom05" placeholder="Pin Code" name="pincode" required>
+      <div class="invalid-feedback">
+        Please provide a valid zip.
+      </div>
+    </div>
+  </div>
+  <div class="flex1">
+    <div class="form-group fl1">
+      <label for="exampleInputEmail1">Email Address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="CustID" required>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group fl1">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+      <label class="form-check-label" for="invalidCheck">
+        Agree to terms and conditions
+      </label>
+      <div class="invalid-feedback">
+        You must agree before submitting.
+      </div>
+    </div>
+  </div>
+  <div id="otp">
+    <h1>Enter OTP</h1>
+<div class="otp-field">
+    <input type="text" maxlength="1"/>
+    <input type="text" maxlength="1"/>
+    <input type="text" maxlength="1" />
+    <input type="text" maxlength="1" />
+</div>
+  </div>
+  
+  <button class="btn btn-primary" id="sub" type="submit">Submit</button>
+  
+</form>
+<form>
+<button class="btn btn-secondary" id="gen">Generate OTP</button>
+</form>
+<p id="mes">Wrong OTP, Please Try Again !!</p>
+<script>
+  let OTP = '';
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+document.getElementById("gen").addEventListener("click",generateOTP)
+
+  function generateOTP() {
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+    OTP='';
+    document.getElementById('otp').style.display='flex';
+ // Declare a digits variable
+ // which stores all digits 
+ let digits = '0123456789';
+ for (let i = 0; i < 4; i++) {
+     OTP += digits[Math.floor(Math.random() * 10)];
+ }
+ alert("Your OTP For Bank Of Lucknow Account Is: "+OTP)
+}
+const inputs = document.querySelectorAll(".otp-field input");
+
+inputs.forEach((input, index) => {
+    input.dataset.index = index;
+    input.addEventListener("keyup", handleOtp);
+    input.addEventListener("paste", handleOnPasteOtp);
+});
+function handleOtp(e) {
+    /**
+     * <input type="text" 👉 maxlength="1" />
+     * 👉 NOTE: On mobile devices `maxlength` property isn't supported,
+     * So we to write our own logic to make it work. 🙂
+     */
+    const input = e.target;
+    let value = input.value;
+    let isValidInput = value.match(/[0-9a-z]/gi);
+    input.value = "";
+    input.value = isValidInput ? value[0] : "";
+
+    let fieldIndex = input.dataset.index;
+    if (fieldIndex < inputs.length - 1 && isValidInput) {
+        input.nextElementSibling.focus();
+    }
+
+    if (e.key === "Backspace" && fieldIndex > 0) {
+        input.previousElementSibling.focus();
+    }
+
+    if (fieldIndex == inputs.length - 1 && isValidInput) {
+        submit();
+    }
+}
+
+function handleOnPasteOtp(e) {
+    const data = e.clipboardData.getData("text");
+    const value = data.split("");
+    if (value.length === inputs.length) {
+        inputs.forEach((input, index) => (input.value = value[index]));
+        submit();
+    }
+}
+
+function submit() {
+    console.log("Submitting...");
+    // 👇 Entered OTP
+    let otp = "";
+    inputs.forEach((input) => {
+        otp += input.value;
+        input.value='';
+        // input.disabled = true;
+        // input.classList.add("disabled");
+    });
+    console.log(otp);
+    if(otp==OTP)
+    {
+    document.getElementById('otp').style.display='none';
+    document.getElementById('sub').style.display='flex';
+    document.getElementById('gen').style.display='none';
+    document.getElementById('mes').style.display='none';
+    }
+    else
+    {
+    document.getElementById('otp').style.display='none';
+    document.getElementById('mes').style.display='block';
+    }
+}
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+</div>
+</div>
+{% endblock body %}
